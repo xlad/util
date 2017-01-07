@@ -13,8 +13,14 @@
             "role": "Author"
         }
     ],
+    "repositories": [
+        {
+            "type": "vcs",
+            "url":  "https://github.com/xlad/util.git"
+        }
+    ],
     "autoload": {
-	    "classmap": ["src/"],
+	"classmap": ["src/"],
         "files": ["src/class-util.php"]
     }
 }
