@@ -1,0 +1,20 @@
+{
+    "name": "xlad/util",
+    "description": "PHP utility classes.",
+    "require": {
+    },
+    "type": "library",
+    "version": "0.0.000",
+    "authors": [
+        {
+            "name": "Vlad-Ciprian Bozesan",
+            "email": "xlad@mail.com",
+            "homepage": "http://xlad.ro",
+            "role": "Author"
+        }
+    ],
+    "autoload": {
+	    "classmap": ["src/"],
+        "files": ["src/class-util.php"]
+    }
+}
