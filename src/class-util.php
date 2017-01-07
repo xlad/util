@@ -3,12 +3,12 @@
 /**
  * Utility php class.
  *
- * @since      0.0.0
+ * @since      0.0.1
  *
  * @package    Util
  * @author     xlad <xlad@mail.com>
  */
-abstract class Util {
+class Util {
 
 	/**
 	 * PHP - Convert mixed array & objects recursively.
