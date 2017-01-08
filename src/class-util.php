@@ -1,14 +1,15 @@
 <?php
 namespace xlad\Util;
 /**
- * Utility php class.
+ * Utility php trait.
  *
- * @since      0.0.1
+ * @since      0.00.005
+ * @version    0.00.001
  *
  * @package    Util
  * @author     xlad <xlad@mail.com>
  */
-class Util {
+trait Util {
 
 	/**
 	 * PHP - Convert mixed array & objects recursively.
@@ -20,15 +21,29 @@ class Util {
 	 * @initialAuthor    https://coderwall.com/joakley77
 	 * @source    https://coderwall.com/p/8mmicq/php-convert-mixed-array-objects-recursively
 	 */
-    public static function object_to_array($d) {
+    public static function objectToArray($d) {
         if (is_object($d))
             $d = get_object_vars($d);
 
         return is_array($d) ? array_map(__METHOD__, $d) : $d;
     }
 
-    public static function array_to_object($d) {
+    public static function arrayToObject($d) {
         return is_array($d) ? (object) array_map(__METHOD__, $d) : $d;
     }
     
+}
+
+
+/**
+ * Utility php class.
+ *
+ * @since      0.0.1
+ * @version    0.00.005
+ *
+ * @package    Util
+ * @author     xlad <xlad@mail.com>
+ */
+class Util {
+	use Util;
 }
