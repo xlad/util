@@ -4,7 +4,7 @@
     "require": {
     },
     "type": "library",
-    "version": "0.0.000",
+    "version": "0.00.004",
     "authors": [
         {
             "name": "Vlad-Ciprian Bozesan",
@@ -20,7 +20,9 @@
         }
     ],
     "autoload": {
-	"classmap": ["src/"],
-        "files": ["src/class-util.php"]
+	    "classmap": ["src/"]
+	    "psr-4": {
+	        "xlad\\": "src/"
+	    }
     }
 }

@@ -1,5 +1,5 @@
 <?php
-
+namespace xlad\Util;
 /**
  * Utility php class.
  *
