@@ -19,16 +19,19 @@ trait phpClasses {
 	 * @var      none
 	 * @param    none
 	 */
-    public static function undefinedClassArguments() {
-
-		$classMethod = new ReflectionMethod( get_parent_class(), __construct() );
+    public static function updateClassArguments( $arguments ) {
 		
-		$arguments = $classMethod->getParameters();
-		
-		if( !empty( $arguments ) )
-            foreach( $arguments[0] as $key => $property )
-                if( property_exists( $this, $key ) )
+		if( !empty( $arguments ) ) {
+            foreach( $arguments[0] as $key => $property ) {
+                if( property_exists( $this, $key ) ) {
                     $this->{$key} = $property;
+				} else {
+                    $this->{$key} = $property;
+				}
+				var_dump($key);
+				var_dump($property);
+			}
+		}
 		
 	}
     
