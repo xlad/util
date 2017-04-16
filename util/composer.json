@@ -1,0 +1,28 @@
+{
+    "name": "xlad/util",
+    "description": "PHP utility classes.",
+    "require": {
+    },
+    "type": "library",
+    "version": "0.00.007",
+    "authors": [
+        {
+            "name": "Vlad-Ciprian Bozesan",
+            "email": "xlad@mail.com",
+            "homepage": "http://xlad.ro",
+            "role": "Author"
+        }
+    ],
+    "repositories": [
+        {
+            "type": "vcs",
+            "url":  "https://github.com/xlad/util.git"
+        }
+    ],
+    "autoload": {
+        "classmap": ["src/"],
+        "psr-4": {
+            "xlad\\": "src/"
+        }
+    }
+}
