@@ -10,6 +10,7 @@ namespace xlad\Util;
  * @author     xlad <xlad@mail.com>
  */
 class Utils {
-	use xlad\Util\ObjectArrayOperations;
-	use xlad\Util\Util;
+	use \xlad\Util\ObjectArrayOperations;
+	use \xlad\Util\Util;
+	use \xlad\Util\FileOperation;
 }
