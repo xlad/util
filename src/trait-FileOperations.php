@@ -16,17 +16,28 @@ trait FileOperation {
      *
      * @reference  http://stackoverflow.com/questions/19760564/php-find-a-string-in-file-then-show-its-line-number
      */
-    public function searchFileLine( $file, $search = '' ) {
+    public function searchFileLine( $file, $search = '', $dir = '' ) {
 
-        $lines = file( $file );
+		$lines = file( $dir . $file );
         $line_number = false;
+        $key = 0;
 
-        while ( list( $key, $line ) = each( $lines ) and ! $line_number ) {
+        /*while ( list( $key, $line ) = myEach( $lines ) and ! $line_number ) {
            $line_number = ( strpos( $line, $search ) !== FALSE ) ? $key + 1 : $line_number;
            $result = $line;
-        }
+        }*/
+        
+        foreach( $lines as $key => $line ) {
+		
+			if( ! $line_number ) {
+				$line_number = ( strpos( $line, $search ) !== FALSE ) ? $key + 1 : $line_number;
+				$result = $line;
+			}
+		
+		}
 
         return $result;
+		
     }
 
 }
