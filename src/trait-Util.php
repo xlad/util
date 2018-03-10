@@ -272,4 +272,43 @@ trait Util {
 
     }
 
+
+    /**
+     * Return the values for a set of keys from an array.
+     *
+     * @since    0.00.006
+     * @since    0.00.001
+     *
+     * @var      array    $columns    the set of keys to be used.
+     * @var      array    $values     array to process.
+     * @param    string   $delimiter  @string delimiter to format the output.
+     *                    use [' AND ' / ' OR '] for mysql WHERE/ LIKE search
+     *                    use [', '] for insert update
+     *
+     * @return   string   SQL string
+     */
+    public function stringSQL( $columns = array(), $values = array(), $delimiter = ' OR ' ) {
+
+        foreach( $columns as $key => $column ) {
+            $conditions[] = "`" . $column . "`='" . $values[$column] . "'";
+        }
+
+        $sql = implode( $delimiter, $conditions );
+
+        return $sql;
+
+    }
+
+
+    /**
+     *
+     */
+    public function tableName( $table ) {
+
+        global $wpdb;
+        return( $wpdb->prefix . $table . $this->Sufix );
+
+    }
+
+
 }
