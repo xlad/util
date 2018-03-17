@@ -287,15 +287,58 @@ trait Util {
      *
      * @return   string   SQL string
      */
-    public function stringSQL( $columns = array(), $values = array(), $delimiter = ' OR ' ) {
+    public function stringSQL( $columns = array(), $values = array(), $delimiter = 'OR' ) {
 
         foreach( $columns as $key => $column ) {
             $conditions[] = "`" . $column . "`='" . $values[$column] . "'";
         }
 
-        $sql = implode( $delimiter, $conditions );
+        $sql = implode( ' ' . $delimiter . ' ', $conditions );
 
         return $sql;
+
+    }
+
+
+    /**
+     *
+     *
+     * @since    0.00.006
+     * @since    0.00.001
+     *
+     * @var      array    $columns    the set of keys to be used.
+     * @var      array    $values     array to process.
+     * @param    string   $delimiter  @string delimiter to format the output.
+     *                    use [' AND ' / ' OR '] for mysql WHERE/ LIKE search
+     *                    use [', '] for insert update
+     *
+     * @return   array	  SQL condition/ parameters array
+     */
+    /*public function arraySQL( $conditions = array(), $parameters = array(), $delimiter = 'OR' ) {
+
+        $arraySQL['conditions'] = array();
+        $arraySQL['parameters'] = array();
+        $arraySQL['delimiter'] = $delimiter;
+
+        foreach( $conditions as $key => $condition ) {
+            $arraySQL['conditions'][] = $condition;
+            $arraySQL['parameters'][] = $parameters[$condition];
+        }
+
+        return $arraySQL;
+
+    }*/
+    public function arraySQL( $conditions, $delimiter = 'OR' ) {
+
+        $arraySQL = array();
+        $arraySQL['delimiter'] = $delimiter;
+
+        foreach( $conditions as $key => $condition ) {
+            $arraySQL['conditions'][] = $key;
+            $arraySQL['parameters'][] = $condition;
+        }
+
+        return $arraySQL;
 
     }
 
