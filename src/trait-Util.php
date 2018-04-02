@@ -93,7 +93,7 @@ trait Util {
 
         echo( str_repeat( $sepparator, $multiplier ) . $nl . '<pre>' );
 
-        print_r( $variable );
+        var_dump( $variable );
 
         echo( '</pre>' . $nl . str_repeat( $sepparator, $multiplier ) . $nl );
 
@@ -130,7 +130,6 @@ trait Util {
 
         $diff = array();
 
-////$this->display( $values, 'VALUES --- ' );
         foreach( $array1 as $key => $value ) {
             if(
                 $this->key_is( $array2, $key )
@@ -139,8 +138,7 @@ trait Util {
             ) {
                 $diff[] = $key;
             }
-////$this->display( $value, '$value --- ' );
-////$this->display( $dbValues[$key], '$dbValues[$key] --- ' );
+
         }
 
         return $diff;
@@ -353,5 +351,56 @@ trait Util {
 
     }
 
+
+    /**
+     * Get the original table name (without prefix and sufix)
+     *
+     * https://stackoverflow.com/questions/1252693/using-str-replace-so-that-it-only-acts-on-the-first-match
+     */
+    public function tableOriginalName( $tableName ) {
+
+        global $wpdb;
+
+        //take out prefix
+        $table = substr_replace( $tableName, '', 0, strlen( $wpdb->prefix ) );
+
+        //take out sufix
+        $table = substr_replace( $tableName, '', strrpos( $tableName, $this->Sufix ), strlen( $this->Sufix ) );
+
+
+        return( $table );
+
+    }
+
+    /**
+     *
+     */
+    public function arrayDateSort( $array, $sortAtt = 'id', $order = SORT_DESC ) {
+
+		foreach ( $array as $key => $part ) {
+			$sort[$key] = strtotime( $part[$sortAtt] );
+		}
+		array_multisort( $sort, $order, $array );
+
+		return( $array );
+
+	}
+
+    /**
+     *
+     */
+	function strStartsWith( $haystack, $needle ) {
+		$length = strlen($needle);
+		return( substr( $haystack, 0, $length ) === $needle );
+	}
+
+    /**
+     *
+     */
+	function strEndsWith( $haystack, $needle ) {
+		$length = strlen( $needle );
+
+		return $length === 0 || ( substr( $haystack, -$length ) === $needle );
+	}
 
 }
