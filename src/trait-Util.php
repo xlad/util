@@ -4,7 +4,7 @@ namespace xlad\Util;
  * Utility php functions trait.
  *
  * @since      0.00.005
- * @version    0.00.003
+ * @version    0.00.004
  *
  * @package    xlad/util    composer packagist package
  * @author     xlad <xlad@mail.com>
@@ -332,8 +332,15 @@ trait Util {
         $arraySQL['delimiter'] = $delimiter;
 
         foreach( $conditions as $key => $condition ) {
-            $arraySQL['conditions'][] = $key;
-            $arraySQL['parameters'][] = $condition;
+			if( is_array( $condition ) ) {
+				foreach( $condition as $cond ) {
+					$arraySQL['conditions'][] = $key;
+					$arraySQL['parameters'][] = $cond;
+				}
+			} else {
+				$arraySQL['conditions'][] = $key;
+				$arraySQL['parameters'][] = $condition;
+			}
         }
 
         return $arraySQL;
@@ -390,17 +397,83 @@ trait Util {
      *
      */
 	function strStartsWith( $haystack, $needle ) {
+
 		$length = strlen($needle);
+
 		return( substr( $haystack, 0, $length ) === $needle );
+
 	}
 
     /**
      *
      */
 	function strEndsWith( $haystack, $needle ) {
+
 		$length = strlen( $needle );
 
 		return $length === 0 || ( substr( $haystack, -$length ) === $needle );
+
 	}
+
+
+	/**
+	 *
+	 */
+	function displayArrayRecursively( $array, $keysString = '' ) {
+
+		if( is_array( $array ) ) {
+
+			foreach ( $array as $key => $value ) {
+				displayArrayRecursively( $value, $keysString . $key . '.' );
+			}
+
+		} else {
+
+			echo $keysString . $array . '<br/> ';
+
+		}
+
+	}
+
+
+	/**
+	 * Return the reference to an element/subarray
+	 * of an array, specified by a key array
+	 *
+	 * @param  array &$array Array to access by reference
+	 * @param  mixed $keys   Array of the keys
+	 * @return mixed         Reference to the match
+	 *
+	 *
+	 *	// Usage
+	 *	$array = [];
+	 *	$keys  =['houses', 'ocean_view', 'state'];
+	 */
+	function &accessArrayRecursive( &$array, $keys ) {
+
+		// If there are keys left to walk down
+		// a nested array
+		if( $keys ) {
+
+			$key = array_shift( $keys );
+
+			// Get and return the reference to the
+			// subarray with the current key
+			$sub = &accessArrayRecursive(
+				$array[$key],
+				$keys
+			);
+
+			return( $sub );
+
+		} else {
+
+			// Return the match
+			return( $array );
+
+		}
+
+	}
+
 
 }
